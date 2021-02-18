@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create User{% endblock %}
+
+{% block body %}
+    <header class="navbar">
+        <div class="container flex">
+            <h1 class="logo">Logo</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="connection">
+        <div class="container">
+            <div class="card">
+                <form action="/user" method="post">
+                    <div class="grid grid-connection">
+                        <div>Nom :</div>
+                        <div><input type="text" placeholder="name"></div>
+                        <div>Mot de passe :</div>
+                        <div><input type="text" placeholder="password"></div>
+                        <div><input class="button" type="submit" value="Création"></div>
+                        <div>
+                            <input type="checkbox" name="" id="">Se souvenir
+                            <div><a href="#">Mot de passe oublié</a></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -19,7 +19,7 @@ class Participant implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=30, unique=true)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $pseudo;
 
@@ -32,11 +32,23 @@ class Participant implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private $mot_de_passe;
+    private $password;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
     }
 
     /**
@@ -47,13 +59,6 @@ class Participant implements UserInterface
     public function getUsername(): string
     {
         return (string) $this->pseudo;
-    }
-
-    public function setUsername(string $pseudo): self
-    {
-        $this->pseudo = $pseudo;
-
-        return $this;
     }
 
     /**
@@ -80,12 +85,12 @@ class Participant implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->mot_de_passe;
+        return (string) $this->password;
     }
 
-    public function setPassword(string $mot_de_passe): self
+    public function setPassword(string $password): self
     {
-        $this->password = $mot_de_passe;
+        $this->password = $password;
 
         return $this;
     }

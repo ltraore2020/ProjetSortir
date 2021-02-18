@@ -1,0 +1,178 @@
+nav ul {
+  list-style-type: none;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+}
+
+/*****     Navbar     *****/
+.navbar {
+  height: 70px;
+  background-color: chartreuse;
+}
+
+.navbar ul {
+  display: flex;
+}
+
+.navbar .flex {
+  justify-content: space-between;
+}
+
+.navbar a {
+  padding: 10px;
+  margin: 0 5px;  
+  background-color: aqua;
+}
+
+/*****     Connection Form     *****/
+.grid-connection {
+  grid-template-columns: repeat(2, auto);
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  margin: 20px auto;
+  width: 420px;
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+form input[type=checkbox] {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  form .grid {
+    grid-template-columns: 100%;
+  }
+
+  .card {
+    width: 300px;
+  }
+}
+
+/*****     Sortie list     *****/
+.list {
+  padding: 10px 20px;
+}
+.list-info {
+  justify-content: flex-end;
+  margin: 20px auto;
+}
+
+form .grid-list {
+  grid-template-columns: repeat(10, auto);
+  justify-content: start;
+}
+
+div.grid-list input, div.grid-list select {
+  margin: 5px 0px;
+}
+
+.list-input {
+  grid-column: span 4;
+  padding: 5px;
+  background-color: aquamarine;
+}
+
+.list-check {
+  grid-column: span 4;
+  padding: 5px;
+  background-color: bisque;
+}
+
+.list-check div {
+  padding: 3px;
+}
+
+.list-search {
+  padding: 5px;
+  background-color: goldenrod;
+}
+
+@media screen and (max-width: 992px){
+  .list-input, .list-check{
+    grid-column: span 5;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .list-input, .list-check{
+    grid-column: span 10;
+  }
+}
+
+/******     Profil     *****/
+.flex-start {
+  gap: 50px;
+  align-items: flex-start;
+}
+
+.grid-profil {
+  grid-template-columns: 1fr 2fr;
+  justify-content: space-between;
+}
+
+.profil-pict {
+  margin: 30px 20px;
+}
+
+/*****     Sortie     *****/
+.table-inscrit {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 20px;
+}
+
+.table-FixHead {
+  overflow-y: auto;
+  height: 200px;
+  width: 400px;
+}
+
+.table-FixHead thead th {
+  position: sticky;
+  top: 0;  
+}
+
+.table-FixHead table {
+  width: 100%;
+}
+
+.table-FixHead th, 
+.table-FixHead td{
+  padding: 8px 16px;
+}
+
+.table-FixHead,
+.table-FixHead td {  
+  box-shadow: inset 1px -1px #000;
+}
+
+.table-FixHead th {
+  background: #eee;
+  box-shadow: inset 1px 1px #000, 0 1px #000;
+}
+
+/* .table-inscrit table th, .table-inscrit table td{
+  width: 200px;
+}
+
+thead, tbody {  
+  display: block;
+}
+
+.table-inscrit table tbody {
+  height: 50px;
+  overflow-y: scroll;
+  /*
+  width: 400px;
+  background-color: darkseagreen;
+} */
