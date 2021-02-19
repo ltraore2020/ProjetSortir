@@ -41,7 +41,7 @@ class Lieu
 
     /**
      * @ORM\ManyToOne(targetEntity=Ville::class, inversedBy="lieux")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="no_ville")
+     * @ORM\JoinColumn(name="ville_no_ville", nullable=false, referencedColumnName="no_ville")
      */
     private $ville_no_ville;
 

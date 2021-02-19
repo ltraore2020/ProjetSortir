@@ -56,19 +56,19 @@ class Sortie
 
     /**
      * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="sorties")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="no_participant")
+     * @ORM\JoinColumn(name="organisateur", nullable=false, referencedColumnName="no_participant")
      */
     private $organisateur;
 
     /**
      * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="sorties")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="no_lieu")
+     * @ORM\JoinColumn(name="lieu_no_lieu", nullable=false, referencedColumnName="no_lieu")
      */
     private $lieu_no_lieu;
 
     /**
      * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="sorties")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="no_etat")
+     * @ORM\JoinColumn(name="etats_no_etat", nullable=false, referencedColumnName="no_etat")
      */
     private $etats_no_etat;
 

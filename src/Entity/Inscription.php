@@ -18,14 +18,14 @@ class Inscription
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity=Sortie::class, inversedBy="inscriptions")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="no_sortie")
+     * @ORM\JoinColumn(name="sortie_no_sortie", nullable=false, referencedColumnName="no_sortie")
      */
     private $sortie_no_sortie;
 
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="inscriptions")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="no_participant")
+     * @ORM\JoinColumn(name="participant_no_participant", nullable=false, referencedColumnName="no_participant")
      */
     private $participant_no_participant;
 
