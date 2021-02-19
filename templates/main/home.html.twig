@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block content %}
+
+    <section class="list">
+        <div class="container">
+            <div class="flex list-info">
+                <div>
+                    <div>Date du jour : <span>{{ date }}</span></div>
+                    <div>Participant : <span>{{app.user.pseudo}}</span></div>
+                </div>
+            </div>
+            <div class="title">Filtrer les sorties</div>
+            <form action="#">
+                <div class="grid grid-list">
+                    <div class="list-input">
+                        <div>
+                            Campus: <select name="" id="">
+                                <option value="">Nantes</option>
+                                <option value="">Rennes</option>
+                                <option value="">Niort</option>
+                            </select>
+                        </div>
+                        <div>
+                            Contient: <input type="search" name="" id="">
+                        </div>
+                        <div>
+                            Entre: <input type="date" name="" id="">
+                            et <input type="date" name="" id="">
+                        </div>
+                    </div>
+                    <div class="list-check">
+                        <div>
+                            <input type="checkbox" name="" id=""> Sorties dont je suis l'organisateur
+                        </div>
+                        <div>
+                            <input type="checkbox" name="" id=""> Sorties auxquelles je suis inscrit
+                        </div>
+                        <div>
+                            <input type="checkbox" name="" id=""> Sorties auxquelles je suis ne suis pas inscrit
+                        </div>
+                        <div>
+                            <input type="checkbox" name="" id=""> Sorties passées
+                        </div>
+                    </div>
+                    <div class="list-search">
+                        <input class="button" type="submit" value="Rechercher">
+                    </div>
+                </div>
+            </form>
+            <table>
+                <tr>
+                    <th>Nom de la sortie</th>
+                    <th>Date de la sortie</th>
+                    <th>Clôture</th>
+                    <th>Inscrits/places</th>
+                    <th>État</th>
+                    <th>Inscrit</th>
+                    <th>Organisateur</th>
+                    <th>Actions</th>
+                </tr>
+                <tr>
+                    <td>Philo</td>
+                    <td>15/03/2020 23:15</td>
+                    <td>15/03/2020</td>
+                    <td>7/7</td>
+                    <td>En cours</td>
+                    <td>X</td>
+                    <td>Marley B.</td>
+                    <td><a href="#">Afficher</a></td>
+                </tr>
+                <tr>
+                    <td>Cuisine</td>
+                    <td>21/03/2020 20:00</td>
+                    <td>20/03/2020</td>
+                    <td>6/10</td>
+                    <td>En création</td>
+                    <td></td>
+                    <td>Doe J.</td>
+                    <td><a href="#">Modifier</a> - Publier</td>
+                </tr>
+            </table>
+            <button class="button">Créer une sortie</button>
+        </div>
+    </section>
+
+{% endblock %}

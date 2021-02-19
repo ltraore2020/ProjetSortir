@@ -1,3 +1,9 @@
+:root {
+  --primary-color: #61DFD8;
+  --light-color: #A6E3E0;
+  --dark-color: #295E5C;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -28,17 +34,21 @@
 }
 
 .button {
-  background-color: aqua;
+  background-color: var(--dark-color);
   margin: 10px 0px;
   padding: 10px;
   border: none;
   cursor: pointer;
   text-decoration: none;
   text-align: center;
-  color: black;
+  color: white;
   font-family: sans-serif;
   font-size: small;
   display: inline-block;
+}
+
+.button:hover {
+  box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)
 }
 
 form {

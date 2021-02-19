@@ -21,19 +21,7 @@ class UserController extends AbstractController
     #[Route('/user', name: 'user_form', methods: ['GET'])]
     public function index(): Response
     {
-        // $entityManager = $this->getDoctrine()->getManager();
-
-        // $user = new Participant();
-        // $user->setPseudo('toto');
-        // $user->setPassword($this->passwordEncoder->encodePassword(
-        //     $user,
-        //     'toto'
-        // ));
-
-        // $entityManager->persist($user);
-        // $entityManager->flush();
-
-        return $this->render('user/index.html.twig', [
+        return $this->render('user/user.html.twig', [
             'controller_name' => 'UserController',
         ]);
     }
