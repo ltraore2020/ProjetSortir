@@ -7,14 +7,25 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 //import './styles/app.css';
+import './styles/utilities.css';
+import './styles/styles.css';
 
 // start the Stimulus application
 // import './bootstrap';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import './like_button'
+import { App } from './classes/App.js';
+import { Home } from './classes/Home.js';
+import { Header } from './classes/Header.js';
 
-// const el = React.createElement('h2', null, 'hello from React');
-const el = <h2> From React JSX <span> \o/ </span> </h2>
-ReactDOM.render(el, document.getElementById('like_button_container'));
+if (document.getElementById('container') != null) {
+    ReactDOM.render(<App />, document.getElementById('container'));
+} else if (document.getElementById('home') != null) {
+    ReactDOM.render(
+        <>
+            <Header />
+            <Home />
+        </>,
+        document.getElementById('home'));
+}
