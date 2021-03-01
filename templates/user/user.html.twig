@@ -3,17 +3,16 @@
 {% block title %}Create User{% endblock %}
 
 {% block body %}
-   
     <section class="connection">
         <div class="container">
             <div class="card">
                 <form action="/user" method="post">
                     <div class="grid grid-connection">
-                        <div>Nom :</div>
-                        <div><input type="text" name="pseudo" placeholder="name"></div>
-                        <div>Mot de passe :</div>
-                        <div><input type="text" name="password" placeholder="password"></div>
-                        <div><input class="button" type="submit" value="Création"></div>
+                        <label for="inputPseudo">Pseudo :</label>
+                        <input id="inputPseudo" type="text" name="pseudo" placeholder="name">
+                        <label for="inputPassword">Mot de passe :</label>
+                        <input id="inputPassword" type="password" name="password" placeholder="password">
+                        <input class="button" type="submit" value="Création">
                     </div>
                 </form>
             </div>

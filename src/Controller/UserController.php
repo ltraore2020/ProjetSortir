@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Participant;
+use App\Entity\Campus;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +32,6 @@ class UserController extends AbstractController
     {
         $pseudo = $request->request->get('pseudo');
         $password = $request->request->get('password');
-        $entityManager = $this->getDoctrine()->getManager();
 
         $user = new Participant();
         $user->setPseudo($pseudo);
@@ -39,7 +39,12 @@ class UserController extends AbstractController
             $user,
             $password
         ));
+        $campus = new Campus();
+        $campus = $this->getDoctrine()->getRepository(Campus::class)->find(1);
+        $user->setCampusNoCampus($campus);
+        $user->setRoles(array_unique(['USER']));
 
+        $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);
         $entityManager->flush();
         return $this->redirectToRoute('app_login');

@@ -28,7 +28,7 @@ export class Home extends React.Component {
                         </div>
                     </div>
                     <div>
-                        {data[0].nom}
+                        {data[0].pseudo}
                     </div>
                     <div className="title">Filtrer les sorties</div>
                     <form action="#">

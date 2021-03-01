@@ -12,6 +12,7 @@
         "doctrine/doctrine-bundle": "^2.2",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.8",
+        "lexik/jwt-authentication-bundle": "^2.11",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^6.0",
         "symfony/asset": "5.2.*",
@@ -54,7 +55,7 @@
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^5.2",
         "symfony/stopwatch": "^5.2",
-        "symfony/var-dumper": "^5.2",
+        "symfony/var-dumper": "5.2.*",
         "symfony/web-profiler-bundle": "^5.2"
     },
     "config": {

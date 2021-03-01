@@ -39,12 +39,12 @@ class Participant implements UserInterface
     /**
      * @ORM\Column(type="string", length=30)
      */
-    private $nom;
+    private $nom = "";
 
     /**
      * @ORM\Column(type="string", length=30)
      */
-    private $prenom;
+    private $prenom = "";
 
     /**
      * @ORM\Column(type="string", length=15, nullable=true)
@@ -54,12 +54,12 @@ class Participant implements UserInterface
     /**
      * @ORM\Column(type="string", length=20)
      */
-    private $mail;
+    private $mail = "";
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $actif;
+    private $actif = 1;
 
     /**
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participants")
