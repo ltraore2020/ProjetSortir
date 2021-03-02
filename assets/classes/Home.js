@@ -7,7 +7,7 @@ export class Home extends React.Component {
     }
 
     componentDidMount() {
-        fetch('/react/api/participant')
+        fetch('/api/react/participant')
             .then(response => response.json())
             .then(user => {
                 this.setState({ data: user });

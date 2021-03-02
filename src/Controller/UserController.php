@@ -49,4 +49,23 @@ class UserController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('app_login');
     }
+
+    #[Route('/user/update', name: 'user_update_get', methods: ['GET'])]
+    public function updateUserGet(): Response
+    {
+        dump("In profil update");
+        return $this->render('main/ReactProfil.html.twig');
+    }
+
+    #[Route('/user/update', name: 'user_update_post', methods: ['POST'])]
+    public function updateUserPost(Request $request): Response
+    {
+        dump("From user post");
+        $content = $request->getContent();
+        dump($content);
+        // return $this->json(['pseudo' => 'pseudo']);
+        $response = new Response($this->json(['pseudo' => 'pseudo']));
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        return $response;
+    }
 }

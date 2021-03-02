@@ -38,11 +38,12 @@ class HomeController extends AbstractController
     #[Route('/react/home', name: 'home')]
     public function index(): Response
     {
+        dump("From react home");
         return $this->render('main/ReactHome.html.twig');
     }
 
 
-    #[Route('/react/api/participant')]
+    #[Route('/api/react/participant')]
     public function getParticipant(): Response
     {
         $pseudo = $this->security->getUser()->getUsername();
@@ -54,7 +55,7 @@ class HomeController extends AbstractController
         $participant = new Participant();
         $participant->setPseudo($user->getPseudo());
 
-        dump($user);
+        // dump($user);
 
         $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
         $jsonResponse = $serializer->serialize(array($participant), 'json');

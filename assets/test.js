@@ -16,8 +16,9 @@ import './styles/styles.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './classes/App.js';
-import { Home } from './classes/Home.js';
 import { Header } from './classes/Header.js';
+import { Home } from './classes/Home.js';
+import { Profil } from './classes/Profil.js';
 
 if (document.getElementById('container') != null) {
     ReactDOM.render(<App />, document.getElementById('container'));
@@ -28,4 +29,11 @@ if (document.getElementById('container') != null) {
             <Home />
         </>,
         document.getElementById('home'));
+} else if (document.getElementById('profil') != null) {
+    ReactDOM.render(
+        <>
+            <Header />
+            <Profil />
+        </>,
+        document.getElementById('profil'));
 }
