@@ -74,8 +74,9 @@ class UserController extends AbstractController
 
 
     #[Route('/api/user', name: 'user_api_get', methods: ['GET'])]
-    public function getParticipant(): Response
+    public function getParticipant(Request $request): Response
     {
+
         $pseudo = $this->security->getUser()->getUsername();
 
         $repository = $this->getDoctrine()->getRepository(Participant::class);
@@ -85,12 +86,13 @@ class UserController extends AbstractController
         $participant = new Participant();
         $participant->setPseudo($user->getPseudo());
 
-        dump($user);
+        // dump($request->headers->get('content-type'));
+        dump($request->headers);
 
         $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
         $jsonResponse = $serializer->serialize(array($participant), 'json');
         $response = new Response($jsonResponse);
-        $response->headers->set('Access-Control-Allow-Origin', '*');
+        // $response->headers->set('Access-Control-Allow-Origin', '*');
         return $response;
     }
 

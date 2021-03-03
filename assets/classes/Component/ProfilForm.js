@@ -10,7 +10,7 @@ const api = axios.create({
 const updateProfil = async data => {
     let res = await api.patch('/user', data);
     window.location.replace("/");
-    // console.log(res);
+    console.log(res);
 };
 
 export const ProfilForm = () => {

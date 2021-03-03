@@ -1,23 +1,36 @@
 import React from 'react';
+import axios from 'axios';
+
+const api = axios.create({
+    baseURL: '/api'
+});
 
 export class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { data: [{ "nom": "" }] }
+        this.state = { user: [{ "nom": "" }] }
+        this.getUser();
     }
 
-    componentDidMount() {
-        fetch('/api/user')
-            .then(response => response.json())
-            .then(user => {
-                this.setState({ data: user });
-                console.log(this.state.data);
-            })
+    getUser = async () => {
+        let data = await api.get('/user')
+            .then(({ data }) => data)
             .catch(err => console.log(err, 'error'));
+        this.setState({ user: data })
+    };
+
+    componentDidMount() {
+        // fetch('/api/user')
+        //     .then(response => response.json())
+        //     .then(user => {
+        //         this.setState({ data: user });
+        //         console.log(this.state.data);
+        //     })
+        //     .catch(err => console.log(err, 'error'));
     }
 
     render() {
-        var data = this.state.data;
+        let user = this.state.user;
         return (
             <section className="list">
                 <div className="container">
@@ -28,7 +41,7 @@ export class Home extends React.Component {
                         </div>
                     </div>
                     <div>
-                        {data[0].pseudo}
+                        {user[0].pseudo}
                     </div>
                     <div className="title">Filtrer les sorties</div>
                     <form action="#">
