@@ -117,7 +117,8 @@ export class Home extends React.Component {
                             </tr>
                         </tbody>
                     </table>
-                    <button className="button">Créer une sortie</button>
+                    {/* <button className="button" >Créer une sortie</button> */}
+                    <a href="/sortie/create" className="button">Créer une sortie </a>
                 </div>
             </section>
         );

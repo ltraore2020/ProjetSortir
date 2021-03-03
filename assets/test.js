@@ -19,6 +19,7 @@ import { App } from './classes/App.js';
 import { Header } from './classes/Header.js';
 import { Home } from './classes/Home.js';
 import { ProfilUser } from './classes/ProfilUser.js';
+import { CreateSortie } from './classes/CreateSortie.js';
 
 if (document.getElementById('container') != null) {
     ReactDOM.render(<App />, document.getElementById('container'));
@@ -36,4 +37,11 @@ if (document.getElementById('container') != null) {
             <ProfilUser />
         </>,
         document.getElementById('profilUser'));
+} else if (document.getElementById('CreateSortie') != null) {
+    ReactDOM.render(
+        <>
+            <Header />
+            <CreateSortie />
+        </>,
+        document.getElementById('CreateSortie'));
 }
