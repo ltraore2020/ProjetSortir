@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProfilForm } from './Component/ProfilForm'
 
-export class Profil extends React.Component {
+export class ProfilUser extends React.Component {
     render() {
         return (
             <section className="profil">

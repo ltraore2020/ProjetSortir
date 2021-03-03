@@ -4,15 +4,12 @@ import * as Yup from 'yup';
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: '/',
-    // headers: {
-    //     "Content-Type": "application/json",
-    //     'Access-Control-Allow-Origin': '*'
-    // }
+    baseURL: '/api'
 });
 
 const updateProfil = async data => {
-    let res = await api.post('user/update', data);
+    let res = await api.patch('/user', data);
+    window.location.replace("/");
     // console.log(res);
 };
 

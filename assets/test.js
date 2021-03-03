@@ -18,7 +18,7 @@ import ReactDOM from 'react-dom';
 import { App } from './classes/App.js';
 import { Header } from './classes/Header.js';
 import { Home } from './classes/Home.js';
-import { Profil } from './classes/Profil.js';
+import { ProfilUser } from './classes/ProfilUser.js';
 
 if (document.getElementById('container') != null) {
     ReactDOM.render(<App />, document.getElementById('container'));
@@ -29,11 +29,11 @@ if (document.getElementById('container') != null) {
             <Home />
         </>,
         document.getElementById('home'));
-} else if (document.getElementById('profil') != null) {
+} else if (document.getElementById('profilUser') != null) {
     ReactDOM.render(
         <>
             <Header />
-            <Profil />
+            <ProfilUser />
         </>,
-        document.getElementById('profil'));
+        document.getElementById('profilUser'));
 }

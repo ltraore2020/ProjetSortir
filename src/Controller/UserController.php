@@ -9,17 +9,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Security\Core\Security;
 
 class UserController extends AbstractController
 {
-    private $passwordEncoder;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
-    {
+    private $passwordEncoder;
+    private $security;
+
+    public function __construct(
+        UserPasswordEncoderInterface $passwordEncoder,
+        Security $security
+    ) {
         $this->passwordEncoder = $passwordEncoder;
+        $this->security = $security;
     }
 
-    #[Route('/user', name: 'user_form', methods: ['GET'])]
+    #[Route('/user/form', name: 'user_form', methods: ['GET'])]
     public function index(): Response
     {
         return $this->render('user/user.html.twig', [
@@ -50,22 +59,50 @@ class UserController extends AbstractController
         return $this->redirectToRoute('app_login');
     }
 
-    #[Route('/user/update', name: 'user_update_get', methods: ['GET'])]
-    public function updateUserGet(): Response
+    #[Route('/user', name: 'user_get', methods: ['GET'])]
+    public function getUser(): Response
     {
-        dump("In profil update");
-        return $this->render('main/ReactProfil.html.twig');
+        return $this->render('main/Profil.html.twig');
     }
 
-    #[Route('/user/update', name: 'user_update_post', methods: ['POST'])]
-    public function updateUserPost(Request $request): Response
+    #[Route('/user/profil', name: 'user_profil', methods: ['GET'])]
+    public function profilUser(): Response
     {
-        dump("From user post");
+        return $this->render('main/ProfilUser.html.twig');
+    }
+
+
+
+    #[Route('/api/user', name: 'user_api_get', methods: ['GET'])]
+    public function getParticipant(): Response
+    {
+        $pseudo = $this->security->getUser()->getUsername();
+
+        $repository = $this->getDoctrine()->getRepository(Participant::class);
+        $user = new Participant();
+        $user = $repository->findOneBy(['pseudo' => $pseudo]);
+
+        $participant = new Participant();
+        $participant->setPseudo($user->getPseudo());
+
+        dump($user);
+
+        $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
+        $jsonResponse = $serializer->serialize(array($participant), 'json');
+        $response = new Response($jsonResponse);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        return $response;
+    }
+
+    #[Route('/api/user', name: 'user_api_patch', methods: ['PATCH'])]
+    public function patchUser(Request $request): Response
+    {
         $content = $request->getContent();
         dump($content);
         // return $this->json(['pseudo' => 'pseudo']);
         $response = new Response($this->json(['pseudo' => 'pseudo']));
         $response->headers->set('Access-Control-Allow-Origin', '*');
         return $response;
+        // return $this->redirectToRoute('home');
     }
 }
