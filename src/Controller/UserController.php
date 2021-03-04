@@ -86,13 +86,10 @@ class UserController extends AbstractController
         $participant = new Participant();
         $participant->setPseudo($user->getPseudo());
 
-        // dump($request->headers->get('content-type'));
-        dump($request->headers);
 
         $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
-        $jsonResponse = $serializer->serialize(array($participant), 'json');
+        $jsonResponse = $serializer->serialize($participant, 'json');
         $response = new Response($jsonResponse);
-        // $response->headers->set('Access-Control-Allow-Origin', '*');
         return $response;
     }
 
@@ -101,10 +98,8 @@ class UserController extends AbstractController
     {
         $content = $request->getContent();
         dump($content);
-        // return $this->json(['pseudo' => 'pseudo']);
         $response = new Response($this->json(['pseudo' => 'pseudo']));
         $response->headers->set('Access-Control-Allow-Origin', '*');
         return $response;
-        // return $this->redirectToRoute('home');
     }
 }

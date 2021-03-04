@@ -14,14 +14,29 @@ export function Home() {
         setUser(data);
     };
 
-    const [user, setUser] = useState([{ "pseudo": "Loading..." }]);
+    const getSorties = async () => {
+        let data = await api.get('/sortie')
+            .then(({ data }) => data)
+            .catch(err => console.log(err, 'error'));
+        setSorties(data);
+    };
+
+    const [user, setUser] = useState({ "pseudo": "Loading..." });
+    const [campus, setCampus] = useState([{ "nom": "Loading..." }]);
+    const [sorties, setSorties] = useState([{ "nom": "Loading..." }]);
+
 
     useEffect(() => {
         getUser();
+        getSorties();
+        console.log({ user });
         return () => {
             // cleanup
         }
-    });
+    }, []);
+
+    console.log({ sorties });
+    console.log({ user });
 
     return (
         <section className="list">
@@ -29,7 +44,8 @@ export function Home() {
                 <div className="flex list-info">
                     <div>
                         <div>Date du jour : XX/XX/XXXX</div>
-                        <div>Participant : {user[0].pseudo}</div>
+                        <div>Participant : {user.pseudo}</div>
+                        <div>{sorties[0].nom}</div>
                     </div>
                 </div>
                 <div className="title">Filtrer les sorties</div>
