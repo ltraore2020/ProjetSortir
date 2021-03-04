@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { TableSortie } from './Component/TableSortie';
 
 export function Home() {
 
@@ -23,7 +24,7 @@ export function Home() {
 
     const [user, setUser] = useState({ "pseudo": "Loading..." });
     const [campus, setCampus] = useState([{ "nom": "Loading..." }]);
-    const [sorties, setSorties] = useState([{ "nom": "Loading..." }]);
+    const [sorties, setSorties] = useState([{ "id": 0, "nom": "Loading..." }]);
 
 
     useEffect(() => {
@@ -45,7 +46,6 @@ export function Home() {
                     <div>
                         <div>Date du jour : XX/XX/XXXX</div>
                         <div>Participant : {user.pseudo}</div>
-                        <div>{sorties[0].nom}</div>
                     </div>
                 </div>
                 <div className="title">Filtrer les sorties</div>
@@ -86,78 +86,9 @@ export function Home() {
                         </div>
                     </div>
                 </form>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nom de la sortie</th>
-                            <th>Date de la sortie</th>
-                            <th>Clôture</th>
-                            <th>Inscrits/places</th>
-                            <th>État</th>
-                            <th>Inscrit</th>
-                            <th>Organisateur</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Philo</td>
-                            <td>15/03/2020 23:15</td>
-                            <td>15/03/2020</td>
-                            <td>7/7</td>
-                            <td>En cours</td>
-                            <td>X</td>
-                            <td>Marley B.</td>
-                            <td><a href="/afficher">Afficher</a></td>
-                        </tr>
-                        <tr>
-                            <td>Cuisine</td>
-                            <td>21/03/2020 20:00</td>
-                            <td>20/03/2020</td>
-                            <td>6/10</td>
-                            <td>En création</td>
-                            <td></td>
-                            <td>Doe J.</td>
-                            <td><a href="/modifier">Modifier</a> - Publier</td>
-                        </tr>
-                    </tbody>
-                </table>
-                {/* <button className="button" >Créer une sortie</button> */}
+                <TableSortie sorties={sorties} />
                 <a href="/sortie/create" className="button">Créer une sortie </a>
             </div>
         </section>
     )
 }
-
-
-// class Home extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = { user: [{ "nom": "" }] }
-//         this.getUser();
-//     }
-
-//     getUser = async () => {
-//         let data = await api.get('/user')
-//             .then(({ data }) => data)
-//             .catch(err => console.log(err, 'error'));
-//         this.setState({ user: data })
-//     };
-
-//     componentDidMount() {
-//         // fetch('/api/user')
-//         //     .then(response => response.json())
-//         //     .then(user => {
-//         //         this.setState({ data: user });
-//         //         console.log(this.state.data);
-//         //     })
-//         //     .catch(err => console.log(err, 'error'));
-//     }
-
-//     render() {
-//         let user = this.state.user;
-//         return (
-
-//         );
-//     }
-// }
