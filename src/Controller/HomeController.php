@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 use App\Entity\Participant;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @IsGranted("ROLE_USER")
@@ -38,5 +39,21 @@ class HomeController extends AbstractController
     {
         dump("From react home");
         return $this->render('main/ReactHome.html.twig');
+    }
+
+    #[Route('/api/date', name: 'date')]
+    public function getDate(): Response
+    {
+        date_default_timezone_set('Europe/paris');
+        $date = date("d/m/Y");
+        // $response = new Response();
+        // $response->setContent(
+        //     json_encode(['date' => $date])
+        // );
+        $response = new JsonResponse(['date' => stripslashes($date)]);
+        dump($date);
+        dump($response);
+        // $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 }

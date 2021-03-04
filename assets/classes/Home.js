@@ -15,6 +15,13 @@ export function Home() {
         setUser(data);
     };
 
+    const getDate = async () => {
+        let data = await api.get('/date')
+            .then(({ data }) => data)
+            .catch(err => console.log(err, 'error'));
+        setDate(data);
+    };
+
     const getSorties = async () => {
         let data = await api.get('/sortie')
             .then(({ data }) => data)
@@ -24,11 +31,19 @@ export function Home() {
 
     const [user, setUser] = useState({ "pseudo": "Loading..." });
     const [campus, setCampus] = useState([{ "nom": "Loading..." }]);
+    let today = new Date();
+    let cDay = String(today.getDate()).padStart(2, '0');
+    let cMonth = String(today.getMonth() + 1).padStart(2, '0');
+    let cYear = String(today.getFullYear());
+    let pageDate = cDay + "/" + cMonth + "/" + cYear;
+    console.log(pageDate);
+    const [date, setDate] = useState({ "date": pageDate });
     const [sorties, setSorties] = useState([{ "id": 0, "nom": "Loading..." }]);
 
 
     useEffect(() => {
         getUser();
+        getDate();
         getSorties();
         console.log({ user });
         return () => {
@@ -38,13 +53,14 @@ export function Home() {
 
     console.log({ sorties });
     console.log({ user });
+    console.log({ date });
 
     return (
         <section className="list">
             <div className="container">
                 <div className="flex list-info">
                     <div>
-                        <div>Date du jour : XX/XX/XXXX</div>
+                        <div>Date du jour : {date.date}</div>
                         <div>Participant : {user.pseudo}</div>
                     </div>
                 </div>
