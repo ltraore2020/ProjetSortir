@@ -22,7 +22,6 @@ class SortieController extends AbstractController
     #[Route('/api/sortie', name: 'sortie_api_get', methods: ['GET'])]
     public function getSorties(): Response
     {
-        dump("From get sortie api");
         $repository = $this->getDoctrine()->getRepository(Sortie::class);
         $sorties = $repository->findAll();
 
@@ -33,7 +32,6 @@ class SortieController extends AbstractController
             [AbstractNormalizer::ATTRIBUTES => ['id', 'nom']]
         );
 
-        dump($jsonResponse);
         $response = new Response($jsonResponse);
         return $response;
     }

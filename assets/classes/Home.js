@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { TableSortie } from './Component/TableSortie';
+import { SearchForm } from './Component/SearchForm';
 
 export function Home() {
 
@@ -13,6 +14,13 @@ export function Home() {
             .then(({ data }) => data)
             .catch(err => console.log(err, 'error'));
         setUser(data);
+    };
+
+    const getCampus = async () => {
+        let data = await api.get('/campus')
+            .then(({ data }) => data)
+            .catch(err => console.log(err, 'error'));
+        setCampus(data);
     };
 
     const getDate = async () => {
@@ -30,13 +38,12 @@ export function Home() {
     };
 
     const [user, setUser] = useState({ "pseudo": "Loading..." });
-    const [campus, setCampus] = useState([{ "nom": "Loading..." }]);
+    const [campus, setCampus] = useState([{ "id": 0, "nom": "Loading..." }]);
     let today = new Date();
     let cDay = String(today.getDate()).padStart(2, '0');
     let cMonth = String(today.getMonth() + 1).padStart(2, '0');
-    let cYear = String(today.getFullYear());
+    let cYear = today.getFullYear();
     let pageDate = cDay + "/" + cMonth + "/" + cYear;
-    console.log(pageDate);
     const [date, setDate] = useState({ "date": pageDate });
     const [sorties, setSorties] = useState([{ "id": 0, "nom": "Loading..." }]);
 
@@ -45,15 +52,13 @@ export function Home() {
         getUser();
         getDate();
         getSorties();
-        console.log({ user });
+        getCampus();
         return () => {
             // cleanup
         }
     }, []);
 
-    console.log({ sorties });
-    console.log({ user });
-    console.log({ date });
+    console.log({ campus });
 
     return (
         <section className="list">
@@ -65,43 +70,7 @@ export function Home() {
                     </div>
                 </div>
                 <div className="title">Filtrer les sorties</div>
-                <form action="#">
-                    <div className="grid grid-list">
-                        <div className="list-input">
-                            <div>
-                                Campus: <select name="" id="">
-                                    <option value="">Nantes</option>
-                                    <option value="">Rennes</option>
-                                    <option value="">Niort</option>
-                                </select>
-                            </div>
-                            <div>
-                                Contient: <input type="search" name="" id="" />
-                            </div>
-                            <div>
-                                Entre: <input type="date" name="" id="" />
-                            et <input type="date" name="" id="" />
-                            </div>
-                        </div>
-                        <div className="list-check">
-                            <div>
-                                <input type="checkbox" name="" id="" /> Sorties dont je suis l'organisateur
-                                </div>
-                            <div>
-                                <input type="checkbox" name="" id="" /> Sorties auxquelles je suis inscrit
-                                </div>
-                            <div>
-                                <input type="checkbox" name="" id="" /> Sorties auxquelles je suis ne suis pas inscrit
-                                </div>
-                            <div>
-                                <input type="checkbox" name="" id="" /> Sorties passées
-                                </div>
-                        </div>
-                        <div className="list-search">
-                            <input className="button" type="submit" value="Rechercher" />
-                        </div>
-                    </div>
-                </form>
+                <SearchForm campus={campus} />
                 <TableSortie sorties={sorties} />
                 <a href="/sortie/create" className="button">Créer une sortie </a>
             </div>

@@ -7,8 +7,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
-use App\Entity\Participant;
+use App\Entity\Campus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -22,18 +26,7 @@ class HomeController extends AbstractController
     {
         $this->security = $security;
     }
-    // #[Route('/home', name: 'home')]
-    // public function index(): Response
-    // {
-    //     date_default_timezone_set('Europe/paris');
-    //     $date = date("d/m/Y");
-    //     return $this->render('main/home.html.twig', [
-    //         'controller_name' => 'HomeController',
-    //         'date' => $date
-    //     ]);
-    // }
 
-    // #[Route('/react/home', name: 'home')]
     #[Route('/', name: 'home')]
     public function index(): Response
     {
@@ -46,14 +39,25 @@ class HomeController extends AbstractController
     {
         date_default_timezone_set('Europe/paris');
         $date = date("d/m/Y");
-        // $response = new Response();
-        // $response->setContent(
-        //     json_encode(['date' => $date])
-        // );
         $response = new JsonResponse(['date' => stripslashes($date)]);
-        dump($date);
-        dump($response);
-        // $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    #[Route('/api/campus', name: 'campus_api_get', methods: ['GET'])]
+    public function getCampus(): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Campus::class);
+        $campus = $repository->findAll();
+
+        $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
+        $jsonResponse = $serializer->serialize(
+            $campus,
+            'json',
+            [AbstractNormalizer::ATTRIBUTES => ['id', 'nom']]
+        );
+
+        $response = new Response($jsonResponse);
         return $response;
     }
 }
