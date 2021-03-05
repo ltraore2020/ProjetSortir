@@ -37,13 +37,16 @@ export function Home() {
         setSorties(data);
     };
 
-    const [user, setUser] = useState({ "pseudo": "Loading..." });
-    const [campus, setCampus] = useState([{ "id": 0, "nom": "Loading..." }]);
+    const updateSorties = state => setSorties(state);
+
     let today = new Date();
     let cDay = String(today.getDate()).padStart(2, '0');
     let cMonth = String(today.getMonth() + 1).padStart(2, '0');
     let cYear = today.getFullYear();
     let pageDate = cDay + "/" + cMonth + "/" + cYear;
+
+    const [user, setUser] = useState({ "pseudo": "Loading..." });
+    const [campus, setCampus] = useState([{ "id": 0, "nom": "Loading..." }]);
     const [date, setDate] = useState({ "date": pageDate });
     const [sorties, setSorties] = useState([{ "id": 0, "nom": "Loading..." }]);
 
@@ -53,12 +56,7 @@ export function Home() {
         getDate();
         getSorties();
         getCampus();
-        return () => {
-            // cleanup
-        }
     }, []);
-
-    console.log({ campus });
 
     return (
         <section className="list">
@@ -70,7 +68,7 @@ export function Home() {
                     </div>
                 </div>
                 <div className="title">Filtrer les sorties</div>
-                <SearchForm campus={campus} />
+                <SearchForm campus={campus} sorties={sorties} update={updateSorties} />
                 <TableSortie sorties={sorties} />
                 <a href="/sortie/create" className="button">Créer une sortie </a>
             </div>
