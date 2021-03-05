@@ -6,6 +6,7 @@ use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Inscription;
 
 /**
  * @ORM\Entity(repositoryClass=SortieRepository::class)
@@ -99,9 +100,9 @@ class Sortie
         return $this;
     }
 
-    public function getDateDebut(): ?\DateTimeInterface
+    public function getDateDebut(): ?string /*?\DateTimeInterface*/
     {
-        return $this->date_debut;
+        return $this->date_debut->format('d/m/Y');
     }
 
     public function setDateDebut(\DateTimeInterface $date_debut): self
@@ -123,9 +124,9 @@ class Sortie
         return $this;
     }
 
-    public function getDateCloture(): ?\DateTimeInterface
+    public function getDateCloture(): ?string /*?\DateTimeInterface*/
     {
-        return $this->date_cloture;
+        return $this->date_cloture->format('d/m/Y');
     }
 
     public function setDateCloture(\DateTimeInterface $date_cloture): self
@@ -235,5 +236,10 @@ class Sortie
         }
 
         return $this;
+    }
+
+    public function getinscrits(): ?int
+    {
+        return count($this->getInscriptions());
     }
 }

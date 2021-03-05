@@ -48,7 +48,7 @@ export function Home() {
     const [user, setUser] = useState({ "pseudo": "Loading..." });
     const [campus, setCampus] = useState([{ "id": 0, "nom": "Loading..." }]);
     const [date, setDate] = useState({ "date": pageDate });
-    const [sorties, setSorties] = useState([{ "id": 0, "nom": "Loading..." }]);
+    const [sorties, setSorties] = useState([{ "id": 1, "nom": "Course", "dateDebut": "20\/03\/2021", "dateCloture": "18\/03\/2021", "nbInscriptionMax": 20, "organisateur": { "pseudo": "Speedy" }, "etatsNoEtat": { "libelle": "Pass\u00e9e" } }]);
 
 
     useEffect(() => {
