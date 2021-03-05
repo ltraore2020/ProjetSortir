@@ -19,10 +19,24 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
+    /**
+     * @return Sortie[] Returns an array of Sortie objects by name
+     */
+    public function findByName($value): array
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT s
+            FROM App\Entity\Sortie s
+            WHERE s.nom LIKE :value'
+        )->setParameter('value', '%' . $value . '%');
+        return $query->getResult();
+    }
+
     // /**
     //  * @return Sortie[] Returns an array of Sortie objects
     //  */
-    /*
+    // /*
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('s')
@@ -31,10 +45,9 @@ class SortieRepository extends ServiceEntityRepository
             ->orderBy('s.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
+    // */
 
     /*
     public function findOneBySomeField($value): ?Sortie

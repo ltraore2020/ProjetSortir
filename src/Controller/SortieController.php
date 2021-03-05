@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Sortie;
+use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -24,6 +26,27 @@ class SortieController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Sortie::class);
         $sorties = $repository->findAll();
+
+        $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
+        $jsonResponse = $serializer->serialize(
+            $sorties,
+            'json',
+            [AbstractNormalizer::ATTRIBUTES => ['id', 'nom']]
+        );
+
+        $response = new Response($jsonResponse);
+        return $response;
+    }
+
+    #[Route('/api/searchSortie', name: 'sortie_api_search', methods: ['POST'])]
+    public function searchSorties(Request $request): Response
+    {
+        $champ = $request->getContent();
+        $params = json_decode($champ);
+        /** @var SortieRepository */
+        $repository = $this->getDoctrine()->getRepository(Sortie::class);
+        $value = $params->contient;
+        $sorties = $repository->findByName($value);
 
         $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
         $jsonResponse = $serializer->serialize(

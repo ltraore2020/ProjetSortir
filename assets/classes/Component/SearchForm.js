@@ -3,17 +3,20 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 
-const api = axios.create({
-    baseURL: '/api'
-});
+
 
 export function SearchForm({ campus, sorties, update }) {
     // const campus = props.campus;
     const liste = campus.map(site => <option key={site.id} value="">{site.nom}</option>);
 
-    const sendSearch = async data => {
-        // let res = await api.post('/searchSortie', data);
-        update([{ "id": 10, "nom": "result" }]);
+    const api = axios.create({
+        baseURL: '/api'
+    });
+
+    const sendSearch = async value => {
+        let res = await api.post('/searchSortie', value)
+            .then(({ data }) => data);
+        update(res);
         console.log('Search data', data);
     };
 
@@ -25,8 +28,8 @@ export function SearchForm({ campus, sorties, update }) {
             })}
             onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
-                    setSubmitting(false);
                     sendSearch(values);
+                    setSubmitting(false);
                 }, 400);
 
             }}>
