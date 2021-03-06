@@ -17,7 +17,6 @@ export function SearchForm({ campus, sorties, update }) {
         let res = await api.post('/searchSortie', value)
             .then(({ data }) => data);
         update(res);
-        console.log('Search data', data);
     };
 
     return (

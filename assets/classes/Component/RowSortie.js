@@ -5,8 +5,9 @@ export function RowSortie(props) {
     const sortie = props.sortie;
     const user = props.user;
 
+    const [action, setaction] = useState(<td><a href={`/afficher/${sortie.id}`}>Afficher</a></td>)
     const [listeSortie, setlisteSortie] = useState([]);
-    const [inscrit, setinscrit] = useState("");
+    const [inscrit, setinscrit] = useState(<td></td>);
     const [inscription, setinscription] = useState([{ "sortieNoSortie": { "id": 0 } }]);
 
     const api = axios.create({
@@ -24,12 +25,16 @@ export function RowSortie(props) {
 
     useEffect(() => {
         getInscription();
-
     }, []);
 
     useEffect(() => {
         if (listeSortie.includes(sortie.id)) {
-            setinscrit("X");
+            setinscrit(<td>X</td>);
+        }
+        if (sortie.organisateur.pseudo == user.pseudo) {
+            setaction(
+                <td><a href={`/modifier/${sortie.id}`}>Modifier</a></td>
+            );
         }
     }, [listeSortie])
 
@@ -40,9 +45,9 @@ export function RowSortie(props) {
             <td>{sortie.dateCloture}</td>
             <td>{sortie.inscrits}/{sortie.nbInscriptionMax}</td>
             <td>{sortie.etatsNoEtat.libelle}</td>
-            <td>{inscrit}</td>
-            <td>{sortie.organisateur.pseudo}</td>
-            <td><a href={`/afficher/${sortie.id}`}>Afficher</a></td>
+            {inscrit}
+            <td><a href={`/user/${sortie.organisateur.pseudo}`}>{sortie.organisateur.pseudo}</a></td>
+            {action}
         </tr>
     )
 }
