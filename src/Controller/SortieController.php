@@ -38,7 +38,6 @@ class SortieController extends AbstractController
                 'inscrits'
             ]]
         );
-        dump($jsonResponse);
 
         $response = new Response($jsonResponse);
         return $response;

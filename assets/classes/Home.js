@@ -5,6 +5,11 @@ import { SearchForm } from './Component/SearchForm';
 
 export function Home() {
 
+    const [user, setUser] = useState({ "id": 0, "pseudo": "Loading..." });
+    const [campus, setCampus] = useState([{ "id": 0, "nom": "Loading..." }]);
+    const [date, setDate] = useState({ "date": pageDate });
+    const [sorties, setSorties] = useState([{ "id": 1, "nom": "Course", "dateDebut": "20\/03\/2021", "dateCloture": "18\/03\/2021", "nbInscriptionMax": 20, "organisateur": { "pseudo": "Speedy" }, "etatsNoEtat": { "libelle": "Pass\u00e9e" } }]);
+
     const api = axios.create({
         baseURL: '/api'
     });
@@ -27,14 +32,14 @@ export function Home() {
         let data = await api.get('/date')
             .then(({ data }) => data)
             .catch(err => console.log(err, 'error'));
-        setDate(data);
+        setDate(data);;
     };
 
     const getSorties = async () => {
         let data = await api.get('/sortie')
             .then(({ data }) => data)
             .catch(err => console.log(err, 'error'));
-        setSorties(data);
+        setSorties(data);;
     };
 
     const updateSorties = state => setSorties(state);
@@ -45,16 +50,21 @@ export function Home() {
     let cYear = today.getFullYear();
     let pageDate = cDay + "/" + cMonth + "/" + cYear;
 
-    const [user, setUser] = useState({ "pseudo": "Loading..." });
-    const [campus, setCampus] = useState([{ "id": 0, "nom": "Loading..." }]);
-    const [date, setDate] = useState({ "date": pageDate });
-    const [sorties, setSorties] = useState([{ "id": 1, "nom": "Course", "dateDebut": "20\/03\/2021", "dateCloture": "18\/03\/2021", "nbInscriptionMax": 20, "organisateur": { "pseudo": "Speedy" }, "etatsNoEtat": { "libelle": "Pass\u00e9e" } }]);
-
+    function getdata() {
+        return Promise.all([getSorties(), getUser(), getDate(), getCampus()]);
+    }
 
     useEffect(() => {
         getUser();
-        getDate();
         getSorties();
+        // getdata()
+        //     .then(([sorties, user, date, campus]) => {
+        //         setSorties(sorties);
+        //         setUser(user);
+        //         setDate(date);
+        //         setCampus(campus);
+        //     });
+        getDate();
         getCampus();
     }, []);
 
@@ -69,7 +79,7 @@ export function Home() {
                 </div>
                 <div className="title">Filtrer les sorties</div>
                 <SearchForm campus={campus} sorties={sorties} update={updateSorties} />
-                <TableSortie sorties={sorties} />
+                <TableSortie sorties={sorties} user={user} />
                 <a href="/sortie/create" className="button">Créer une sortie </a>
             </div>
         </section>

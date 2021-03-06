@@ -30,7 +30,6 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(): Response
     {
-        dump("From react home");
         return $this->render('main/ReactHome.html.twig');
     }
 

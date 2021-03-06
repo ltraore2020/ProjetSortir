@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { RowSortie } from './RowSortie';
 
 export function TableSortie(props) {
+
     const sorties = props.sorties;
-    const rowSorties = sorties.map(sortie => <RowSortie key={sortie.id} sortie={sortie} />);
+    const user = props.user;
+
+    const rowSorties = sorties.map(
+        sortie => <RowSortie key={sortie.id + user.id} sortie={sortie} user={user} />);
+
+
     return (
         <table>
             <thead>

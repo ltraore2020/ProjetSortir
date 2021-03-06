@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Security\Core\Security;
 
@@ -76,19 +77,17 @@ class UserController extends AbstractController
     #[Route('/api/user', name: 'user_api_get', methods: ['GET'])]
     public function getParticipant(Request $request): Response
     {
-
-        $pseudo = $this->security->getUser()->getUsername();
-
-        $repository = $this->getDoctrine()->getRepository(Participant::class);
-        $user = new Participant();
-        $user = $repository->findOneBy(['pseudo' => $pseudo]);
-
-        $participant = new Participant();
-        $participant->setPseudo($user->getPseudo());
-
-
+        $user = $this->security->getUser();
         $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
-        $jsonResponse = $serializer->serialize($participant, 'json');
+        $jsonResponse = $serializer->serialize(
+            $user,
+            'json',
+            [AbstractNormalizer::ATTRIBUTES =>
+            [
+                'id', 'pseudo',
+            ]]
+        );
+
         $response = new Response($jsonResponse);
         return $response;
     }
