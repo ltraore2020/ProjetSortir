@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export function RowSortie(props) {
     const sortie = props.sortie;
     const user = props.user;
 
-    const [action, setaction] = useState(<td><a href={`/afficher/${sortie.id}`}>Afficher</a></td>)
+    const [action, setaction] = useState(<td><Link to={`/afficher/${sortie.id}`}>Afficher</Link></td>)
+
     const [listeSortie, setlisteSortie] = useState([]);
     const [inscrit, setinscrit] = useState(<td></td>);
     const [inscription, setinscription] = useState([{ "sortieNoSortie": { "id": 0 } }]);
@@ -46,7 +48,8 @@ export function RowSortie(props) {
             <td>{sortie.inscrits}/{sortie.nbInscriptionMax}</td>
             <td>{sortie.etatsNoEtat.libelle}</td>
             {inscrit}
-            <td><a href={`/user/${sortie.organisateur.pseudo}`}>{sortie.organisateur.pseudo}</a></td>
+            {/* <td><a href={`/user/${sortie.organisateur.pseudo}`}>{sortie.organisateur.pseudo}</a></td> */}
+            <td><Link to={`/user/${sortie.organisateur.pseudo}`}>{sortie.organisateur.pseudo}</Link></td>
             {action}
         </tr>
     )

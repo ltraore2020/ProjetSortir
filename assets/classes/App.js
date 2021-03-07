@@ -4,6 +4,7 @@ import { Header } from './Header';
 import { Home } from './Home.js';
 import { ProfilUser } from './ProfilUser.js';
 import { CreateSortie } from './CreateSortie.js';
+import { ReadSortie } from './ReadSortie'
 import { BrowserRouter as Router, Switch, Route, Link, HashRouter } from 'react-router-dom';
 
 export function App() {
@@ -12,16 +13,18 @@ export function App() {
         <HashRouter>
             <Header />
             <Switch>
-                <Route path="/user/profil">
-                    <ProfilUser />
-                </Route>
-                <Route path="/sortie/create">
-                    <CreateSortie />
-                </Route>
-                <Route path="/">
+                <Route path="/" exact>
                     <Home />
                 </Route>
-
+                <Route path="/user/profil" exact>
+                    <ProfilUser />
+                </Route>
+                <Route path="/sortie/create" exact>
+                    <CreateSortie />
+                </Route>
+                <Route path="/afficher/:id" exact>
+                    <ReadSortie />
+                </Route>
             </Switch>
         </HashRouter>
     )
