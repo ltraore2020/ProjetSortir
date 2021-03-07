@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { TableSortie } from './Component/TableSortie';
 import { SearchForm } from './Component/SearchForm';
+import { Link } from 'react-router-dom';
 
 export function Home() {
 
@@ -73,14 +74,16 @@ export function Home() {
             <div className="container">
                 <div className="flex list-info">
                     <div>
-                        <div>Date du jour : {date.date}</div>
+                        <div>Date : {date.date}</div>
                         <div>Participant : {user.pseudo}</div>
                     </div>
                 </div>
                 <div className="title">Filtrer les sorties</div>
                 <SearchForm campus={campus} sorties={sorties} update={updateSorties} />
                 <TableSortie sorties={sorties} user={user} />
-                <a href="/sortie/create" className="button">Créer une sortie </a>
+                {/* <a href="/sortie/create" className="button">Créer une sortie </a> */}
+                <Link to="/sortie/create" className="button">Créer une sortie</Link>
+
             </div>
         </section>
     )

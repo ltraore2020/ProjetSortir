@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export class Header extends React.Component {
     render() {
@@ -9,15 +10,15 @@ export class Header extends React.Component {
                         <h1 className="logo">Logo</h1>
                         <nav>
                             <ul>
-                                <li><a href="/">Accueil</a></li>
-                                <li><a href="/user/profil">Mon profil</a></li>
+                                <li><Link to="/">Accueil</Link></li>
+                                <li><Link to="/user/profil">Mon profil</Link></li>
                                 <li><a href="/logout">Se déconnecter</a></li>
                             </ul>
                             <div className="nav-icon">
                                 <span>Icon</span>
                                 <div className="dropdown-nav">
-                                    <a href="/">Accueil</a>
-                                    <a href="/user/profil">Mon profil</a>
+                                    <Link to="/">Accueil</Link>
+                                    <Link to="/user/profil">Mon profil</Link>
                                     <a href="/logout">Se déconnecter</a>
                                 </div>
                             </div>

@@ -66,11 +66,11 @@ class UserController extends AbstractController
         return $this->render('main/Profil.html.twig');
     }
 
-    #[Route('/user/profil', name: 'user_profil', methods: ['GET'])]
-    public function profilUser(): Response
-    {
-        return $this->render('main/ProfilUser.html.twig');
-    }
+    // #[Route('/user/profil', name: 'user_profil', methods: ['GET'])]
+    // public function profilUser(): Response
+    // {
+    //     return $this->render('main/ProfilUser.html.twig');
+    // }
 
 
 

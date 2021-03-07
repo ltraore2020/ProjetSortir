@@ -1,26 +1,28 @@
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { Header } from './Header';
+import { Home } from './Home.js';
+import { ProfilUser } from './ProfilUser.js';
+import { CreateSortie } from './CreateSortie.js';
+import { BrowserRouter as Router, Switch, Route, Link, HashRouter } from 'react-router-dom';
 
-export class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-        this.handleClick = this.handleClick.bind(this);
-    }
+export function App() {
+    console.log("in app.js");
+    return (
+        <HashRouter>
+            <Header />
+            <Switch>
+                <Route path="/user/profil">
+                    <ProfilUser />
+                </Route>
+                <Route path="/sortie/create">
+                    <CreateSortie />
+                </Route>
+                <Route path="/">
+                    <Home />
+                </Route>
 
-    handleClick() {
-        console.log('clicked');
-    }
-
-    render() {
-        let elem = <MyFunction />;
-        return (
-            <h3 onClick={this.handleClick}>Hello from classes/App.js{elem}</h3>
-        )
-    }
-}
-
-function MyFunction() {
-    return (<span> toto </span>);
+            </Switch>
+        </HashRouter>
+    )
 }
